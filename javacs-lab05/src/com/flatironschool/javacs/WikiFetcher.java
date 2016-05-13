@@ -31,11 +31,16 @@ public class WikiFetcher {
 		Document doc = conn.get();
 
 		// select the content text and pull out the paragraphs.
-		Element content = doc.getElementById("mw-content-text");
-
-		// TODO: avoid selecting paragraphs from sidebars and boxouts
-		Elements paras = content.select("p");
-		return paras;
+		return getParagraphs(doc);
+	}
+	
+	private Element getContentText(Document doc){
+		return doc.getElementById("mw-content-text");
+	}
+	
+	private Elements getParagraphs(Document doc){
+		Element content = getContentText(doc);
+		return content.select("p");
 	}
 
 	/**
@@ -56,10 +61,7 @@ public class WikiFetcher {
 		InputStream stream = WikiFetcher.class.getClassLoader().getResourceAsStream(filename);
 		Document doc = Jsoup.parse(stream, "UTF-8", filename);
 
-		// TODO: factor out the following repeated code
-		Element content = doc.getElementById("mw-content-text");
-		Elements paras = content.select("p");
-		return paras;
+		return getParagraphs(doc);
 	}
 
 	/**

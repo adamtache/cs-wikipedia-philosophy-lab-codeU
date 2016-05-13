@@ -1,18 +1,11 @@
 package com.flatironschool.javacs;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-
-import org.jsoup.nodes.Element;
-import org.jsoup.nodes.Node;
-import org.jsoup.nodes.TextNode;
-
-import org.jsoup.select.Elements;
 
 public class WikiPhilosophy {
 	
-	final static WikiFetcher wf = new WikiFetcher();
+	
 	
 	/**
 	 * Tests a conjecture about Wikipedia and Philosophy.
@@ -28,24 +21,7 @@ public class WikiPhilosophy {
 	 * @throws IOException
 	 */
 	public static void main(String[] args) throws IOException {
-		
-        // some example code to get you started
-
-		String url = "https://en.wikipedia.org/wiki/Java_(programming_language)";
-		Elements paragraphs = wf.fetchWikipedia(url);
-
-		Element firstPara = paragraphs.get(0);
-		
-		Iterable<Node> iter = new WikiNodeIterable(firstPara);
-		for (Node node: iter) {
-			if (node instanceof TextNode) {
-				System.out.print(node);
-			}
-        }
-
-        // the following throws an exception so the test fails
-        // until you update the code
-        String msg = "Complete this lab by adding your code and removing this statement.";
-        throw new UnsupportedOperationException(msg);
+		List<String> crawled = new WikiCrawler().getCrawled();
+		System.out.println("There were " + crawled.size() + " pages visited in total.");
 	}
 }
