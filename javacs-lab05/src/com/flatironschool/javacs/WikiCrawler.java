@@ -23,10 +23,12 @@ public class WikiCrawler {
 	 * @throws IOException
 	 */
 	public List<String> getCrawled() throws IOException{
-		String goal = this.getGoalURL();
+//		String goal = this.getGoalURL();
+		String goal = this.getPhilosophyGoal();
 		String goalPage = goal.substring(goal.indexOf("/wiki/"));
 		List<String> crawled = new ArrayList<>();
-		String url = this.getStartURL();
+//		String url = this.getStartURL();
+		String url = this.getJavaStart();
 		crawled.add(url);
 		boolean foundLink = false;
 		boolean end = false;
@@ -193,6 +195,20 @@ public class WikiCrawler {
 	 */
 	private String getJavaURL(){
 		return "https://en.wikipedia.org/wiki/Java_(programming_language)";
+	}
+	
+	private String getJavaStart(){
+		String url = getJavaURL();
+		return getValidURL(url);
+	}
+	
+	private String getPhilosophyGoal(){
+		String url = this.getPhilosophyURL();
+		return getValidURL(url);
+	}
+	
+	private String getValidURL(String url){
+		return url.substring(url.indexOf("/wiki/"));
 	}
 
 }
