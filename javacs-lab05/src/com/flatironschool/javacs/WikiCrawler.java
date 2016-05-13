@@ -25,7 +25,6 @@ public class WikiCrawler {
 	public List<String> getCrawled() throws IOException{
 //		String goal = this.getGoalURL();
 		String goal = this.getPhilosophyGoal();
-		String goalPage = goal.substring(goal.indexOf("/wiki/"));
 		List<String> crawled = new ArrayList<>();
 //		String url = this.getStartURL();
 		String url = this.getJavaStart();
@@ -86,7 +85,7 @@ public class WikiCrawler {
 							else{ // "Next" is a valid link: assign to "url" for next paragraphs iteration
 								url = next;
 							}
-							if(next.equals(goalPage)){ // Check for goal
+							if(next.equals(goal)){ // Check for goal
 								System.out.println("Congratulations. " + goal+" was found.");
 								crawled.add(url);
 								return crawled;
